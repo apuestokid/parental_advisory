@@ -6,7 +6,6 @@ import tailwindcss from '@tailwindcss/vite'
 import svgLoader from 'vite-svg-loader'
 
 const manualChunkMatchers = [
-  ['vuei18n', ['vue-i18n']],
   ['highcharts', ['highcharts', 'highcharts-vue']],
   ['highchartsMaps', ['@highcharts/map-collection']],
 ]
