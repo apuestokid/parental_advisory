@@ -1,0 +1,6 @@
+* {
+    scrollbar-width:thin;
+    scrollbar-color: var(--color-primary) transparent;
+    /* scrollbar-gutter: stable; */
+    scroll-behavior: smooth;
+}

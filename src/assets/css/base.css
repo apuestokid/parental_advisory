@@ -1,0 +1,79 @@
+html {
+  font-size: clamp(14px, 0.4165vw + 0.74104vh, 32px);
+}
+body {
+  @apply bg-body text-font-light;
+}
+#app,
+body,
+html {
+  @apply h-full w-full fixed;
+}
+
+@utility flex-center {
+  @apply flex justify-center items-center;
+}
+@utility absolute-center {
+  @apply absolute top-1/2 left-1/2 -translate-1/2;
+}
+@utility module {
+  @apply bg-module py-4 px-5 rounded-2xl shadow-module;
+
+  .module_title {
+    @apply text-2xl font-bold text-font mb-1;
+  }
+  .module_sub_title {
+    @apply text-xl font-bold text-font mt-1;
+  }
+}
+
+@utility module-invert {
+  @apply bg-module-invert py-4 px-5 rounded-2xl shadow-module text-font-invert;
+}
+@utility box {
+  @apply bg-box py-4 px-5 rounded-3xl;
+  .box_title {
+    @apply text-lg font-bold mb-1;
+  }
+}
+
+@utility piece {
+  @apply bg-piece py-4 px-5 rounded-xl shadow-md;
+  .piece_title {
+    @apply text-font-lighten mb-4;
+  }
+}
+@utility piece-sm {
+  @apply bg-piece p-2 rounded-sm;
+  .piece_title {
+    @apply text-font-lighten mb-4;
+  }
+}
+
+.breadcrumb_text {
+  @apply text-sm text-font-lighten mb-1;
+}
+
+.debug-box {
+  @apply text-black fixed bottom-0 right-0 bg-font/80 z-999999 p-2 m-2 rounded-xl shadow overflow-auto border border-aux;
+  max-width: 50vw;
+  max-height: 50vh;
+  white-space: pre;
+  &.debug-box-l {
+    @apply left-0 right-auto;
+  }
+
+  &.debug-box-t {
+    @apply top-0;
+  }
+}
+
+input {
+  @apply bg-body p-2 rounded-lg  text-sm border border-font-light w-full;
+  .input_title {
+    @apply font-semibold mb-2;
+  }
+}
+.z-full {
+  z-index: 999999999;
+}

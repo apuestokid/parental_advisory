@@ -1,0 +1,154 @@
+/*
+  PantallaSana — Paleta de marca
+  Tono cálido y de confianza. Sin rojos de alarma.
+  Tokens expuestos como utilidades Tailwind (bg-ps-*, text-ps-*, border-ps-*).
+*/
+@theme {
+  --color-ps-bg: #fbf8f3; /* fondo crema suave */
+  --color-ps-surface: #ffffff; /* tarjetas */
+  --color-ps-panel: #f1eade; /* paneles secundarios */
+  --color-ps-panel-soft: #f7f2e9;
+
+  --color-ps-primary: #2e9e83; /* verde confianza */
+  --color-ps-primary-dark: #257e69;
+  --color-ps-primary-soft: #e3f2ec;
+
+  --color-ps-accent: #e89a4e; /* ámbar cálido */
+  --color-ps-accent-soft: #fbead6;
+
+  --color-ps-ink: #243239; /* texto principal */
+  --color-ps-muted: #5e6e76; /* texto secundario */
+  --color-ps-line: #e7dfd2; /* bordes/separadores */
+
+  /* niveles de dificultad (sin rojo) */
+  --color-ps-easy: #3fa46a;
+  --color-ps-medium: #e0922f;
+  --color-ps-advanced: #5a7dd0;
+
+  --color-ps-success: #2e9e83;
+  --color-ps-info: #4a9bd4;
+
+  --shadow-ps-card: 0 6px 20px rgba(36, 50, 57, 0.08);
+  --shadow-ps-soft: 0 2px 8px rgba(36, 50, 57, 0.06);
+}
+
+/* Variante oscura: misma identidad cálida, fondo y superficies ennegrecidos.
+   Se activa cuando el boilerplate añade data-theme="dark" a <html>. */
+[data-theme='dark'] .ps-app {
+  --color-ps-bg: #1a1815;
+  --color-ps-surface: #25221e;
+  --color-ps-panel: #2f2b26;
+  --color-ps-panel-soft: #28241f;
+
+  --color-ps-primary: #4abf9f;
+  --color-ps-primary-dark: #2e9e83;
+  --color-ps-primary-soft: #1d3a32;
+
+  --color-ps-accent: #f1ad6c;
+  --color-ps-accent-soft: #3a2c1d;
+
+  --color-ps-ink: #f0ece4;
+  --color-ps-muted: #a8a299;
+  --color-ps-line: #3a3530;
+
+  --color-ps-easy: #5cc287;
+  --color-ps-medium: #f1a857;
+  --color-ps-advanced: #8aa9e6;
+
+  --shadow-ps-card: 0 6px 20px rgba(0, 0, 0, 0.4);
+  --shadow-ps-soft: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Contenedor raíz de la app: ocupa todo el alto y aporta su propio fondo,
+   independientemente del tema oscuro del boilerplate.
+   Mapea las variables canónicas de Zeus UI a la paleta PantallaSana, de modo
+   que cualquier componente Zeus (zButton, zCheckbox, zProgress…) hereda el
+   tono cálido sin perder identidad. */
+.ps-app {
+  --color-primary: var(--color-ps-primary);
+  --color-primary-dark: var(--color-ps-primary-dark);
+  --color-primary-rgb: 46, 158, 131;
+  --color-secondary: var(--color-ps-accent);
+  --color-text: var(--color-ps-ink);
+  --color-font: var(--color-ps-ink);
+  --color-font-light: var(--color-ps-muted);
+  --color-font-dark: var(--color-ps-ink);
+  --color-body: var(--color-ps-bg);
+  --color-module: var(--color-ps-surface);
+  --color-piece: var(--color-ps-panel);
+  --color-box: var(--color-ps-panel-soft);
+  --color-border: var(--color-ps-line);
+  --color-separator-light: var(--color-ps-line);
+  --color-separator-dark: var(--color-ps-line);
+  --color-input: var(--color-ps-surface);
+  --color-success: var(--color-ps-success);
+  --color-info: var(--color-ps-info);
+  --color-warning: var(--color-ps-accent);
+  --color-aux: var(--color-ps-panel);
+
+  background: var(--color-ps-bg);
+  color: var(--color-ps-ink);
+  min-height: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  font-family: 'Albert Sans Variable', system-ui, sans-serif;
+}
+
+.ps-app *,
+.ps-app *::before,
+.ps-app *::after {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Tarjeta base reutilizable */
+.ps-card {
+  background: var(--color-ps-surface);
+  border: 1px solid var(--color-ps-line);
+  border-radius: 1.25rem;
+  box-shadow: var(--shadow-ps-soft);
+}
+
+/* Acento noventero B/N: títulos de sección sobre barra oscura,
+   guiño al sello "Parental Advisory" sin invadir la paleta cálida. */
+.ps-bar {
+  display: inline-block;
+  padding: 0.16em 0.7em 0.22em;
+  background: var(--color-ps-ink);
+  color: #fff;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  line-height: 1.15;
+  text-transform: uppercase;
+}
+
+/* Botón primario en versión oscura (CTA con sello retro) */
+.ps-btn-pa {
+  background: var(--color-ps-ink);
+  color: #fff;
+}
+.ps-btn-pa:enabled:hover {
+  background: #000;
+}
+
+/* Foco accesible visible en toda la app */
+.ps-app :focus-visible {
+  outline: 3px solid var(--color-ps-primary);
+  outline-offset: 2px;
+  border-radius: 0.5rem;
+}
+
+/* Animación suave de entrada para listas/tarjetas */
+@keyframes ps-rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.ps-rise {
+  animation: ps-rise 0.35s ease both;
+}

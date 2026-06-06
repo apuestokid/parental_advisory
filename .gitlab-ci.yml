@@ -1,0 +1,19 @@
+include:
+  - project: 'sistemas/deploy'
+    file: 'deploy-vue.yml'
+
+#deploy-pre:
+#  extends: '.vue-deploy'
+#  variables:
+#    TAG:
+#    BRANCH: 'develop'
+#    PROJECT_PATH:
+#    ENV_FILE:
+
+#deploy-prod:
+#  extends: '.vue-deploy'
+#  variables:
+#    TAG:
+#    BRANCH: 'main'
+#    PROJECT_PATH:
+#    ENV_FILE:

@@ -1,0 +1,12 @@
+@import 'tailwindcss';
+
+@import './fonts.css';
+
+@import '@zeus-front/zeus-icons/zeus-icons.css';
+
+@import './theme.css';
+@import './scrolls.css';
+
+@import './base.css';
+
+@import './pantallasana.css';

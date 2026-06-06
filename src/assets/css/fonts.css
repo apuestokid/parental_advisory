@@ -1,0 +1,7 @@
+@import '@fontsource-variable/albert-sans';
+@import '@fontsource-variable/azeret-mono';
+
+@theme {
+  --default-font-family: 'Albert Sans Variable';
+  --font-mono: 'Azeret Mono Variable';
+}

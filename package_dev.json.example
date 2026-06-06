@@ -1,0 +1,50 @@
+{
+  "name": "new_boilerplate",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "author": "Zeus Frontend Team",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --fix",
+    "format": "prettier --write src/",
+    "framework-dev": "npm install && npm link ~/valet/new_boilerplate/zeus-fns ~/valet/new_boilerplate/zeus-icons ~/valet/new_boilerplate/zeus-ui"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.19.0"
+  },
+  "dependencies": {
+    "@fontsource-variable/albert-sans": "^5.2.8",
+    "@fontsource-variable/azeret-mono": "^5.2.11",
+    "@fontsource-variable/montserrat": "^5.2.8",
+    "@highcharts/map-collection": "^2.3.1",
+    "@tailwindcss/vite": "^4.1.13",
+    "@zeus-front/zeus-fns": "file:./../../zeus-fns",
+    "@zeus-front/zeus-icons": "^0.3.1",
+    "@zeus-front/zeus-ui": "^0.3.2",
+    "highcharts": "^12.4.0",
+    "highcharts-vue": "^2.0.1",
+    "tailwindcss": "^4.1.13",
+    "vite-svg-loader": "^5.1.0",
+    "vue": "^3.5.21",
+    "vue-i18n": "^11.1.12",
+    "vue-router": "^4.5.1",
+    "uuid": "^13.0.0"
+  },
+  "devDependencies": {
+    "@intlify/unplugin-vue-i18n": "^11.0.1",
+    "@vitejs/plugin-vue": "^6.0.1",
+    "eslint": "^9.36.0",
+    "eslint-plugin-vue": "~10.5.0",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "globals": "^16.4.0",
+    "prettier": "^3.6.2",
+    "vite": "^7.1.7",
+    "vite-plugin-vue-devtools": "^8.0.2"
+  }
+}

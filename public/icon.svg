@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="PantallaSana — Control parental">
+  <!-- Sello estilo "Parental Advisory" con la paleta del theme: tinta + crema -->
+  <rect width="512" height="512" rx="112" fill="#243239"/>
+  <rect x="52" y="52" width="408" height="408" rx="78" fill="none" stroke="#fbf8f3" stroke-width="20"/>
+
+  <!-- Marca en grande (dos líneas, condensada) -->
+  <text x="98" y="214" text-anchor="start"
+        font-family="'Arial Narrow', 'Helvetica Neue', Arial, sans-serif"
+        font-weight="900" font-size="150" letter-spacing="-6"
+        textLength="316" lengthAdjust="spacingAndGlyphs" fill="#fbf8f3">PANTALLA</text>
+  <text x="98" y="322" text-anchor="start"
+        font-family="'Arial Narrow', 'Helvetica Neue', Arial, sans-serif"
+        font-weight="900" font-size="150" letter-spacing="-6" fill="#fbf8f3">SANA</text>
+
+  <!-- Barra inferior invertida -->
+  <rect x="84" y="360" width="344" height="74" rx="8" fill="#fbf8f3"/>
+  <text x="256" y="412" text-anchor="middle"
+        font-family="'Arial Narrow', 'Helvetica Neue', Arial, sans-serif"
+        font-weight="800" font-size="42" letter-spacing="3"
+        textLength="300" lengthAdjust="spacingAndGlyphs" fill="#243239">CONTROL PARENTAL</text>
+</svg>
