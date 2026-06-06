@@ -178,7 +178,7 @@ import { actions, deviceProgress } from '@/pantallasana/store'
 
 const route = useRoute()
 const toast = useToast()
-const { t, messages, locale } = useI18n()
+const { t, messages, locale } = useI18n({ useScope: 'global' })
 
 const device = computed(() => getDevice(route.params.id))
 const guide = computed(() => getGuide(route.params.id))

@@ -11,7 +11,15 @@
 
         <div class="flex-1"></div>
 
-        <zButtonGroup v-model="locale" :options="localeOptions" size="sm" class="hidden sm:flex" />
+        <zButtonGroup
+          :model-value="locale"
+          :options="localeOptions"
+          value-key="value"
+          label-key="label"
+          size="sm"
+          class="hidden sm:flex"
+          @update:model-value="setLocale"
+        />
 
         <zDayNight
           :model-value="isDark"
@@ -80,7 +88,7 @@
 </template>
 
 <script setup>
-import { computed, onBeforeMount, watch } from 'vue'
+import { computed, onBeforeMount } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { protectionLevel, state } from '@/pantallasana/store'
@@ -90,7 +98,7 @@ import PaLogo from '@/pantallasana/components/PaLogo.vue'
 
 const route = useRoute()
 const { canInstall, install } = usePwaInstall()
-const { locale, availableLocales } = useI18n()
+const { locale, availableLocales } = useI18n({ useScope: 'global' })
 
 onBeforeMount(() => globalActions.setTheme())
 
@@ -99,7 +107,13 @@ const localeOptions = availableLocales.map(code => ({
   label: code.toUpperCase(),
 }))
 
-watch(locale, newLocale => globalActions.setLanguage(newLocale))
+function setLocale(next) {
+  // zButtonGroup puede emitir el objeto de la opción o el value plano según versión.
+  const code = typeof next === 'string' ? next : next?.value
+  if (!code) return
+  locale.value = code
+  globalActions.setLanguage(code)
+}
 
 const isDark = computed(() => globalState.theme === 'dark')
 

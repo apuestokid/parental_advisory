@@ -93,7 +93,7 @@ import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { ACTIVITIES, recommendScreenTime } from '@/pantallasana/data/screenTime'
 
-const { t } = useI18n()
+const { t } = useI18n({ useScope: 'global' })
 
 const age = ref(8)
 const selectedActivities = ref(['games'])

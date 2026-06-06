@@ -88,7 +88,7 @@ import { useI18n } from 'vue-i18n'
 import { buildIndex, search } from '@/pantallasana/data/search'
 import { FAQS } from '@/pantallasana/data/faqs'
 
-const { t, locale } = useI18n()
+const { t, locale } = useI18n({ useScope: 'global' })
 
 const query = ref('')
 const openedFaqId = ref(null)

@@ -166,7 +166,7 @@ import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { APPS, FEATURE_KEYS, PLATFORM_KEYS } from '@/pantallasana/data/apps'
 
-const { t } = useI18n()
+const { t } = useI18n({ useScope: 'global' })
 
 const featureKeys = FEATURE_KEYS
 

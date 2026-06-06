@@ -21,7 +21,6 @@ const i18n = createI18n({
   locale: state.language ?? 'es',
   fallbackLocale: 'es',
   globalInjection: true,
-  useScope: 'local',
   missingWarn: true,
   fallbackWarn: false,
   messages,

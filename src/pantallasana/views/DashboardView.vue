@@ -122,7 +122,7 @@ import { selectedDeviceList, protectionLevel, deviceProgress, state } from '@/pa
 import { getGuide } from '@/pantallasana/data/guides'
 
 const router = useRouter()
-const { t } = useI18n()
+const { t } = useI18n({ useScope: 'global' })
 
 onMounted(() => {
   if (!state.selectedDevices.length) router.replace({ name: 'ps-onboarding' })
