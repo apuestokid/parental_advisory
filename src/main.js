@@ -16,6 +16,7 @@ import zeusIcons from '@zeus-front/zeus-icons'
 import { HighchartsVue, Highcharts } from '@/highcharts'
 
 import { registerServiceWorker } from '@/pantallasana/pwa'
+import { initAuth } from '@/pantallasana/composables/useAuth'
 
 const app = createApp(App)
 setupApiRequest()
@@ -36,3 +37,4 @@ import './assets/css/main.css'
 app.mount('#app')
 
 registerServiceWorker()
+initAuth()

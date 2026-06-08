@@ -53,6 +53,27 @@
             {{ $t('ps.ui.protectionShort') }}
           </span>
         </RouterLink>
+
+        <!-- Sesión (solo si la sincronización está configurada) -->
+        <template v-if="authEnabled">
+          <RouterLink
+            v-if="!isLoggedIn"
+            :to="{ name: 'Login' }"
+            class="flex items-center gap-1 rounded-full border border-ps-line px-3 py-1.5 text-sm font-semibold text-ps-muted transition hover:bg-ps-panel"
+          >
+            <span aria-hidden="true">☁️</span>
+            <span class="hidden sm:inline">Sincronizar</span>
+          </RouterLink>
+          <button
+            v-else
+            type="button"
+            class="flex items-center gap-1 rounded-full bg-ps-primary-soft px-3 py-1.5 text-sm font-semibold text-ps-primary-dark"
+            @click="logout"
+          >
+            <span aria-hidden="true">👤</span>
+            <span class="hidden max-w-32 truncate sm:inline">{{ userLabel }}</span>
+          </button>
+        </template>
       </div>
 
       <!-- Navegación principal -->
@@ -94,11 +115,20 @@ import { useI18n } from 'vue-i18n'
 import { protectionLevel, state } from '@/pantallasana/store'
 import { usePwaInstall } from '@/pantallasana/composables/usePwaInstall'
 import { state as globalState, actions as globalActions } from '@/store'
+import { useAuth } from '@/pantallasana/composables/useAuth'
 import PaLogo from '@/pantallasana/components/PaLogo.vue'
 
 const route = useRoute()
 const { canInstall, install } = usePwaInstall()
 const { locale, availableLocales } = useI18n({ useScope: 'global' })
+
+const { user, isLoggedIn, isEnabled: authEnabled, signOut } = useAuth()
+const userLabel = computed(
+  () => user.value?.user_metadata?.display_name || user.value?.email || 'Mi cuenta'
+)
+async function logout() {
+  await signOut()
+}
 
 onBeforeMount(() => globalActions.setTheme())
 

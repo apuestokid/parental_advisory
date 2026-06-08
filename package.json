@@ -10,6 +10,7 @@
     "preview": "vite build && vite preview",
     "lint": "eslint . --fix",
     "format": "prettier --write src/",
+    "seed:admin": "node --use-system-ca --env-file=.env scripts/seed-admin.js",
     "framework-dev": "npm install && npm link ~/valet/new_boilerplate/zeus-fns  ~/valet/new_boilerplate/zeus-blocks ~/valet/new_boilerplate/zeus-icons ~/valet/new_boilerplate/zeus-ui"
   },
   "engines": {
@@ -20,6 +21,7 @@
     "@fontsource-variable/albert-sans": "^5.2.8",
     "@fontsource-variable/azeret-mono": "^5.2.11",
     "@highcharts/map-collection": "^2.3.2",
+    "@supabase/supabase-js": "^2.107.0",
     "@tailwindcss/vite": "^4.3.0",
     "@zeus-front/zeus-blocks": "^2.1.0",
     "@zeus-front/zeus-flags": "^1.0.0",

@@ -1,6 +1,7 @@
 import { reactive, computed } from 'vue'
 import { DEVICES } from '@/pantallasana/data/devices'
 import { getStepCount, stepId } from '@/pantallasana/data/guides'
+import { supabase } from '@/pantallasana/supabase/client'
 
 const STORAGE_KEY = 'pantallasana'
 
@@ -28,19 +29,90 @@ export const state = reactive({
   onboarded: persisted?.onboarded ?? false,
 })
 
-function persist() {
+/** Snapshot serializable del estado (lo que viaja a localStorage y a la nube). */
+function snapshot() {
+  return {
+    selectedDevices: state.selectedDevices,
+    completedSteps: state.completedSteps,
+    onboarded: state.onboarded,
+  }
+}
+
+/** Escribe solo en localStorage (caché offline). */
+function persistLocal() {
   try {
-    localStorage.setItem(
-      STORAGE_KEY,
-      JSON.stringify({
-        selectedDevices: state.selectedDevices,
-        completedSteps: state.completedSteps,
-        onboarded: state.onboarded,
-      })
-    )
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(snapshot()))
   } catch {
     // almacenamiento no disponible: la app sigue funcionando en memoria
   }
+}
+
+// --- Sincronización con Supabase (opcional) -------------------------------
+// Solo activa si hay credenciales (supabase != null) y sesión iniciada.
+let syncUserId = null
+let pushTimer = null
+
+/** Sube el estado actual a la nube (debounced para no saturar en cada clic). */
+function schedulePush() {
+  if (!supabase || !syncUserId) return
+  clearTimeout(pushTimer)
+  pushTimer = setTimeout(pushRemote, 800)
+}
+
+async function pushRemote() {
+  if (!supabase || !syncUserId) return
+  try {
+    await supabase
+      .from('user_settings')
+      .upsert({ user_id: syncUserId, data: snapshot(), updated_at: new Date().toISOString() })
+  } catch {
+    // sin conexión: queda guardado en local y se reintentará en el próximo cambio
+  }
+}
+
+/** Aplica una config remota al estado local (la remota gana). */
+function applyRemote(data) {
+  state.selectedDevices = data.selectedDevices ?? []
+  state.completedSteps = data.completedSteps ?? []
+  state.onboarded = data.onboarded ?? false
+  persistLocal()
+}
+
+/**
+ * Al iniciar sesión: la config remota gana. Si aún no hay fila remota
+ * (primer login), se sube la local para no perder el progreso anónimo.
+ */
+export async function pullRemote(userId) {
+  if (!supabase) return
+  try {
+    const { data, error } = await supabase
+      .from('user_settings')
+      .select('data')
+      .eq('user_id', userId)
+      .maybeSingle()
+    if (error) return
+    if (data?.data && Object.keys(data.data).length) {
+      applyRemote(data.data) // remoto gana
+      syncUserId = userId
+    } else {
+      syncUserId = userId
+      await pushRemote() // bootstrap: subir la config local existente
+    }
+  } catch {
+    // sin conexión: seguimos con la config local
+  }
+}
+
+/** Llamar al cerrar sesión: deja de sincronizar (los datos locales se conservan). */
+export function stopSync() {
+  syncUserId = null
+  clearTimeout(pushTimer)
+}
+
+/** Persiste en local y, si hay sesión, programa la subida a la nube. */
+function persist() {
+  persistLocal()
+  schedulePush()
 }
 
 export const actions = {
